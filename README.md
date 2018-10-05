@@ -10,8 +10,12 @@ This library allows your agent code to send data to the [Treasure Data platform]
 
 Before using the library you need to have:
 
-- A [Treasure Data API key](https://support.treasuredata.com/hc/en-us/articles/360000763288-Get-API-Keys).
-- Preconfigured Treasure Data database and table (see https://support.treasuredata.com/hc/en-us/articles/360001266348-Database-and-Table-Management).
+- A [Treasure Data API key](https://support.treasuredata.com/hc/en-us/articles/360000763288-Get-API-Keys). For data sending operations the Write-only key is enough.
+- Preconfigured [Treasure Data database and table](https://support.treasuredata.com/hc/en-us/articles/360001266348-Database-and-Table-Management).
+
+### Examples ###
+
+Working examples are provided in the [Examples](./Examples) directory.
 
 ### Callbacks ###
 
@@ -25,9 +29,7 @@ This method returns a new TreasureData instance.
 
 | Parameter | Data Type | Required? | Description |
 | --- | --- | --- | --- |
-| *apiKey* | String | Yes | Treasure Data API key. For more information, please see [the Treasure Data documentation](https://support.treasuredata.com/hc/en-us/articles/360000763288-Get-API-Keys) |
-
-#### Example ####
+| *apiKey* | String | Yes | [Treasure Data API key](https://support.treasuredata.com/hc/en-us/articles/360000763288-Get-API-Keys) |
 
 ```
 #require "TreasureData.agent.lib.nut:1.0.0"
@@ -43,9 +45,9 @@ This method sends data record to the specified Treasure Data table. For more inf
 
 | Parameter | Data Type | Required? | Description |
 | --- | --- | --- | --- |
-| *dbName* | String | Yes | Treasure Data database name |
-| *tableName* | String | Yes | Treasure Data table name |
-| *data* | Key-Value Table | Yes | ??? |
+| *dbName* | String | Yes | [Treasure Data database name](https://support.treasuredata.com/hc/en-us/articles/360001266348-Database-and-Table-Management) |
+| *tableName* | String | Yes | [Treasure Data table name](https://support.treasuredata.com/hc/en-us/articles/360001266348-Database-and-Table-Management) |
+| *data* | Key-Value Table | Yes | The data to send &mdash; a key-value table, where a "key" is the name of the field (column) in the database table, the "value" is the value to be written into that field. |
 | *callback* | Function | Optional | Executed once the operation is completed |
 
 This method returns nothing. The result of the operation may be obtained via the *callback* function, which has the following parameter:
@@ -53,7 +55,11 @@ This method returns nothing. The result of the operation may be obtained via the
 | Parameter | Data Type | Description |
 | --- | --- | --- |
 | *error* | [TreasureData.Error](#treasuredataerror-class) | Error details, or `null` if the operation succeeds |
-| *data* | Key-Value Table | The original data passed to sendData() method |
+| *data* | Key-Value Table | The original data passed to the `sendData()` method |
+
+```
+TODO
+```
 
 ### setDebug(*value*) ###
 
@@ -61,18 +67,14 @@ This method enables (*value* is `true`) or disables (*value* is `false`) the lib
 
 ## TreasureData.Error Class ##
 
-This class represents an error returned by the library in case of HTTP request to Treasure Data failed. It has the following public properties:
+This class represents an error returned by the library when an HTTP request to the Treasure Data platform fails. It has the following public properties:
 
 - *httpStatus* &mdash; An integer indicating the HTTP status code.
 - *httpResponse* &mdash; A table of key-value strings holding the response body of the failed request.
 
-## Examples ##
-
-Working examples are provided in the [Examples](./Examples) directory and described [here](./Examples/README.md).
-
 ## Testing ##
 
-Tests for the library are provided in the [tests](./tests) directory and described [here](./tests/README.md).
+Tests for the library are provided in the [tests](./tests) directory.
 
 ## License ##
 
