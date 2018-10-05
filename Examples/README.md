@@ -9,7 +9,7 @@ This example sends data into a preconfigured Treasure Data table:
 - Data is sent every ten seconds.
 - Every data record contains:
   - A `"value"` attribute. This is an integer value, which starts at 1 and increases by 1 with every record sent. It restarts from 1 every time the example is restarted.
-  - A `"strValue"` attribute. This is a dummy string value.
+  - A `"strvalue"` attribute. This is a string value, which contains integer from the `"value"` attribute, converted to string and prefixed by `strValue`.
 
 ## Setup and Run ##
 
@@ -34,7 +34,7 @@ This example sends data into a preconfigured Treasure Data table:
 - Assign a development device to the newly created Device Group.
 - Open the code editor for the newly created Device Group.
 - Copy the [DataSender source code](./DataSender.agent.nut) and paste it into the code editor as the agent code.
-- Set the *TREASURE_DATA_API_KEY* constant in the agent example code to the value of Treasure Data API key you retrieved and saved above.
+- Set the *TREASURE_DATA_API_KEY* constant in the agent example code to the value of Treasure Data API key you retrieved and saved earlier.
 ![SetTreasureDataConsts](../png/SetTreasureDataConsts.png?raw=true)
 - Click **Build and Force Restart**.
 - Use the code editor’s log pane to confirm that data is being sent successfully:
@@ -42,9 +42,13 @@ This example sends data into a preconfigured Treasure Data table:
 
 ### Monitor the data in Treasure Data ###
 
-**Note** The data can be monitored with 4-5 minutes delay after sending.
-
+- Return to your [Treasure Data account](https://console.treasuredata.com).
 - Choose **Databases** in the left menu and click **test_database** database.
 - Click **test_table** table.
 - Ensure **test_table** contains **strValue** and **value** columns and some records are displayed in the table preview.
+
+**Note 1:** The data appears in the table preview with **4~5 minutes delay** after sending.
+
+**Note 2:** The table preview **does not show all received records**. Only some of them. To get all records from the table you may execute an SQL SELECT Query.
+
 ![TablePreview](../png/TablePreview.png?raw=true)
