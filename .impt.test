@@ -1,0 +1,12 @@
+{
+  "deviceGroupId": "f2b28583-2c70-e1ce-44e3-81e1e90c2761",
+  "timeout": 30,
+  "stopOnFail": false,
+  "allowDisconnect": false,
+  "builderCache": false,
+  "testFiles": [
+    "*.test.nut",
+    "tests/**/*.test.nut"
+  ],
+  "agentFile": "TreasureData.agent.lib.nut"
+}
