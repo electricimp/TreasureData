@@ -26,8 +26,12 @@
 
 // TreasureData library sample.
 // Periodically sends data to preconfigured TreasureData table.
-// Data are sent every 10 seconds, they consist of integer increasing value, converted to string
-// and measureTime attribute with data measurement time in seconds since the epoch format.
+// Data is sent every 10 seconds.
+// Every data record contains:
+//  - A "value" attribute. This is an integer value, which starts at 1 and increases by 1 with every record sent.
+//    It restarts from 1 every time the example is restarted.
+//  - A "strvalue" attribute. This is a string value, which contains integer from the "value" attribute, 
+//    converted to string and prefixed by `strValue`.
 
 const TREASURE_DATA_DATABASE_NAME = "test_database";
 const TREASURE_DATA_TABLE_NAME = "test_table";
@@ -46,7 +50,7 @@ class DataSender {
         _counter++;
         return {
             "value" : _counter,
-            "strValue" : "strValue" + _counter.tostring()
+            "strvalue" : "strValue" + _counter.tostring()
         };
     }
 
@@ -64,7 +68,7 @@ class DataSender {
     // Callback executed once the data is sent
     function onDataSent(error, data) {
         if (error) {
-            server.error("Data sending failed: " + error.details);
+            server.error("Data sending failed: status code " + error.httpStatus);
         } else {
             server.log("Data sent successfully:");
             server.log(http.jsonencode(data));

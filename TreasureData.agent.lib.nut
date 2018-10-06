@@ -29,7 +29,7 @@ const _TREASURE_DATA_SEND_PATH = "/postback/v3/event/%s/%s";
 // Error details produced by the library
 const _TREASURE_DATA_REQUEST_FAILED = "TreasureData request failed with status code";
 
-// This library allows your agent code to send data to the Treasure Data platform
+// This library allows your agent code to send data to the Treasure Data platform (https://www.treasuredata.com)
 // via the Treasure Data REST API (https://support.treasuredata.com/hc/en-us/articles/360000675487-Postback-API).
 class TreasureData {
     static VERSION = "1.0.0";
@@ -59,7 +59,9 @@ class TreasureData {
     // Parameters:
     //     dbName : string           Treasure Data database name.
     //     tableName : string        Treasure Data table name.
-    //     data : table              
+    //     data : table              The data to send - a key-value table,
+    //                               where a "key" is the name of the field (column) in the database table,
+    //                               the "value" is the value to be written into that field.
     //     callback : function       Optional callback function executed once the operation
     //         (optional)            is completed.
     //                               The callback signature:
@@ -146,7 +148,7 @@ class TreasureData {
         }
     }
 
-    // Auxiliary class, represents error returned by the library in case of HTTP request to Treasure Data failed.
+    // Auxiliary class, represents an error returned by the library when an HTTP request to the Treasure Data platform fails.
     // The error details can be found in the error.httpStatus and error.httpResponse properties.
     Error = class {
         // HTTP status code (integer)

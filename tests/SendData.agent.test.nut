@@ -36,7 +36,7 @@ class SendDataTestCase extends ImpTestCase {
     }
 
     function testSendSimpleData() {
-        _sendData({ "strValue" : "abc" })
+        return _sendData({ "strValue" : "abc" })
             .then(function (value) {
                 return _sendData({ "strValue" : null });
             }.bindenv(this))
@@ -48,27 +48,26 @@ class SendDataTestCase extends ImpTestCase {
             }.bindenv(this))
             .then(function (value) {
                 return _sendData({ "boolValue" : true });
-            }.bindenv(this))
-            .fail(function (reason) {
-                return Promise.reject(reason);
             }.bindenv(this));
     }
 
     function testSendComplexData() {
-        _sendData({ "strValue" : "xyz", "intValue" : 456, "floatValue" : 789.23, "boolValue" : false })
+        return _sendData({ "strValue" : "xyz", "intValue" : 456, "floatValue" : 789.23, "boolValue" : false })
             .then(function (value) {
                 return _sendData({ "tableValue" : { "a" : "b", "c" : "d" } });
-            }.bindenv(this))
-            .fail(function (reason) {
-                return Promise.reject(reason);
             }.bindenv(this));
     }
 
     function testSendDataWithDebug() {
         _treasureDataClient.setDebug(true);
         return _sendData({ "strValue" : "abc" })
-            .finally(function(valueOrReason) {
+            .then(function(value) {
                 _treasureDataClient.setDebug(false);
+                return Promise.resolve(value);
+            }.bindenv(this))
+            .fail(function (reason) {
+                _treasureDataClient.setDebug(false);
+                return Promise.reject(reason);
             }.bindenv(this));
     }
 
@@ -76,7 +75,7 @@ class SendDataTestCase extends ImpTestCase {
         return Promise(function (resolve, reject) {
             _treasureDataClient.sendData(TEST_DB_NAME, TEST_TABLE_NAME, data, function (error, data) {
                 if (error) {
-                    return reject(error.details);
+                    return reject("Error " + error.httpStatus);
                 }
                 return resolve();
             });

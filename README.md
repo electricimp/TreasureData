@@ -58,7 +58,18 @@ This method returns nothing. The result of the operation may be obtained via the
 | *data* | Key-Value Table | The original data passed to the `sendData()` method |
 
 ```
-TODO
+const DATABASE_NAME = "<YOUR_DATABASE_NAME>";
+const TABLE_NAME = "<YOUR_TABLE_NAME>";
+
+treasureData.sendData(
+    DATABASE_NAME,
+    TABLE_NAME,
+    { "column1" : "value", "column2" : 123 },
+    function (error, data) {
+        if (error) {
+            server.error("Data sending failed: status code " + error.httpStatus);
+        }
+    }.bindenv(this));
 ```
 
 ### setDebug(*value*) ###

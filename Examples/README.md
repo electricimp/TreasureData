@@ -45,7 +45,7 @@ This example sends data into a preconfigured Treasure Data table:
 - Return to your [Treasure Data account](https://console.treasuredata.com).
 - Choose **Databases** in the left menu and click **test_database** database.
 - Click **test_table** table.
-- Ensure **test_table** contains **strValue** and **value** columns and some records are displayed in the table preview.
+- Ensure **test_table** contains **strvalue** and **value** columns and some records are displayed in the table preview.
 
 **Note 1:** The data appears in the table preview with **4~5 minutes delay** after sending.
 
