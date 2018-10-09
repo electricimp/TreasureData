@@ -19,7 +19,7 @@ Working examples are provided in the [Examples](./Examples) directory.
 
 ### Callbacks ###
 
-All requests that are made to the Treasure Data platform occur asynchronously. Every method that sends a request has an optional parameter which takes a callback function that will be executed when the operation is completed, whether successfully or not. The callback’s parameters are listed in the corresponding method description, but every callback has at least one parameter, *error*. If *error* is `null`, the operation has been executed successfully. Otherwise, *error* is an instance of the [TreasureData.Error](#treasuredataerror-class) class and contains the details of the error.
+All requests that are made to the Treasure Data platform occur asynchronously. Every method that sends a request has an optional parameter which takes a callback function that will be executed when the operation is completed, whether successfully or not. The callback’s parameters are listed in the corresponding method description, but every callback has at least one parameter, *error*. If *error* is `null`, the operation has been executed successfully. Otherwise, *error* is [HTTP response table](https://electricimp.com/docs/api/httprequest/sendasync/) and contains the details of the error.
 
 ## TreasureData Class ##
 
@@ -54,7 +54,7 @@ This method returns nothing. The result of the operation may be obtained via the
 
 | Parameter | Data Type | Description |
 | --- | --- | --- |
-| *error* | [TreasureData.Error](#treasuredataerror-class) | Error details, or `null` if the operation succeeds |
+| *error* | table | Error details, [HTTP response table](https://electricimp.com/docs/api/httprequest/sendasync/), or `null` if the operation succeeds |
 | *data* | Key-Value Table | The original data passed to the `sendData()` method |
 
 ```
@@ -67,7 +67,7 @@ treasureData.sendData(
     { "column1" : "value", "column2" : 123 },
     function (error, data) {
         if (error) {
-            server.error("Data sending failed: status code " + error.httpStatus);
+            server.error("Sending data failed: status code " + error.statuscode);
         }
     }.bindenv(this));
 ```
@@ -75,13 +75,6 @@ treasureData.sendData(
 ### setDebug(*value*) ###
 
 This method enables (*value* is `true`) or disables (*value* is `false`) the library debug output (including error logging). It is disabled by default. The method returns nothing.
-
-## TreasureData.Error Class ##
-
-This class represents an error returned by the library when an HTTP request to the Treasure Data platform fails. It has the following public properties:
-
-- *httpStatus* &mdash; An integer indicating the HTTP status code.
-- *httpResponse* &mdash; A table of key-value strings holding the response body of the failed request.
 
 ## Testing ##
 

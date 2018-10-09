@@ -75,7 +75,7 @@ class SendDataTestCase extends ImpTestCase {
         return Promise(function (resolve, reject) {
             _treasureDataClient.sendData(TEST_DB_NAME, TEST_TABLE_NAME, data, function (error, data) {
                 if (error) {
-                    return reject("Error " + error.httpStatus);
+                    return reject("Error " + error.statuscode);
                 }
                 return resolve();
             });

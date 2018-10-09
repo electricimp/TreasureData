@@ -50,7 +50,7 @@ class DataSender {
         _counter++;
         return {
             "value" : _counter,
-            "strvalue" : "strValue" + _counter.tostring()
+            "strvalue" : "strValue" + _counter
         };
     }
 
@@ -68,7 +68,7 @@ class DataSender {
     // Callback executed once the data is sent
     function onDataSent(error, data) {
         if (error) {
-            server.error("Data sending failed: status code " + error.httpStatus);
+            server.error("Sending data failed: status code " + error.statuscode);
         } else {
             server.log("Data sent successfully:");
             server.log(http.jsonencode(data));

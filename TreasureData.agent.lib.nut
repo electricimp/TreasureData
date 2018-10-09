@@ -66,7 +66,7 @@ class TreasureData {
     //         (optional)            is completed.
     //                               The callback signature:
     //                               callback(error, data), where
-    //                                   error : TreasureData.Error  Error details,
+    //                                   error : table               Error details, HTTP response table (see https://electricimp.com/docs/api/httprequest/sendasync/)
     //                                                               or null if the operation succeeds.
     //                                   data : table                The original data passed to 
     //                                                               sendData() method.
@@ -111,13 +111,7 @@ class TreasureData {
         local error = null;
         local httpStatus = response.statuscode;
         if (httpStatus < 200 || httpStatus >= 300) {
-            local body = null;
-            try {
-                body = (response.body == "") ? {} : http.jsondecode(response.body);
-            } catch (e) {
-                _logError(e);
-            }
-            error = TreasureData.Error(httpStatus, body);
+            error = response;
         }
         callback(error);
     }
@@ -125,7 +119,7 @@ class TreasureData {
     // Logs error occurred and invokes callback with default parameters.
     function _invokeDefaultCallback(callback, error, data) {
         if (error) {
-            _logError(format("%s: %i", _TREASURE_DATA_REQUEST_FAILED, error.httpStatus));
+            _logError(format("%s: %i", _TREASURE_DATA_REQUEST_FAILED, error.statuscode));
         }
         if (callback) {
             imp.wakeup(0, function () {
@@ -145,21 +139,6 @@ class TreasureData {
     function _logDebug(message) {
         if (_debug) {
             server.log("[TreasureData] " + message);
-        }
-    }
-
-    // Auxiliary class, represents an error returned by the library when an HTTP request to the Treasure Data platform fails.
-    // The error details can be found in the error.httpStatus and error.httpResponse properties.
-    Error = class {
-        // HTTP status code (integer)
-        httpStatus = null;
-
-        // Response body of the failed request (table)
-        httpResponse = null;
-
-        constructor(httpStatus, httpResponse) {
-            this.httpStatus = httpStatus;
-            this.httpResponse = httpResponse;
         }
     }
 }
