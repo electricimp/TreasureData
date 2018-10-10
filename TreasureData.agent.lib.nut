@@ -97,7 +97,7 @@ class TreasureData {
     function _processRequest(method, endpoint, path, headers, body, callback) {
         local url = endpoint + path;
         local encodedBody = http.jsonencode(body);
-        _logDebug(format("Doing the request: %s %s, body: %s", method, url, encodedBody));
+        _logDebug(format("Sending %s request to %s with body: %s", method, url, encodedBody));
 
         local request = http.request(method, url, headers, encodedBody);
         request.sendasync(function (response) {
