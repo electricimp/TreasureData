@@ -39,7 +39,7 @@ This example sends data to a pre-configured Treasure Data table.
 
 ### Running the Application ###
 
-1. In impCentral, click **Build and Force Restart**.
+1. In the impCentral code editor, click **Build and Force Restart**.
 1. Use the code editor’s log pane to confirm that data is being sent successfully. The log will look like this:
 ![DataSenderLogs](../png/SenderExample.png?raw=true)
 
