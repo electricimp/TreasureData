@@ -1,6 +1,6 @@
 # TreasureData #
 
-This library allows your agent code to send data to the [Treasure Data platform](https://www.treasuredata.com) via the [Treasure Data REST API](https://support.treasuredata.com/hc/en-us/articles/360000675487-Postback-API).
+This library allows your agent code to send data to the [Treasure Data platform](https://www.treasuredata.com) via the [Treasure Data Postback API](https://support.treasuredata.com/hc/en-us/articles/360000675487-Postback-API).
 
 Before using the library you will need:
 
@@ -35,7 +35,7 @@ treasureData <- TreasureData(MY_API_KEY);
 
 ### Callbacks ###
 
-All requests that are made to the Treasure Data platform occur asynchronously. Every method that sends a request has an optional parameter which takes a callback function that will be executed when the operation has completed, whether successfully or not. The callback’s parameters are listed in the corresponding method description, but every callback has at least one parameter, *error*. If *error* is `null`, the operation has been executed successfully. Otherwise, *error* is an [HTTP response table](https://electricimp.com/docs/api/httprequest/sendasync/) which contains the details of the error.
+All requests that are made to the Treasure Data platform occur asynchronously. Every method that sends a request has an optional parameter which takes a callback function that will be executed when the operation has completed, whether successfully or not. The callback’s parameters are listed in the corresponding method description, but every callback has at least one parameter, *error*. If *error* is `null`, the operation has been executed successfully. Otherwise, *error* is an [HTTP response table](https://developer.electricimp.com/api/httprequest/sendasync) which contains the details of the error.
 
 ### sendData(*dbName, tableName, data[, callback]*) ###
 
@@ -56,7 +56,7 @@ If specified, the function passed into *callback* should include the following p
 
 | Parameter | Data&nbsp;Type | Description |
 | --- | --- | --- |
-| *error* | Table | Error details as an [HTTP response table](https://electricimp.com/docs/api/httprequest/sendasync/), or `null` if the operation succeeded |
+| *error* | Table | Error details as an [HTTP response table](https://developer.electricimp.com/api/httprequest/sendasync), or `null` if the operation succeeded |
 | *data* | Table | The original data passed to *sendData()* |
 
 #### Returns ####
