@@ -9,6 +9,10 @@ Before using the library you will need:
 
 **To include this library to your project, add** `#require "TreasureData.agent.lib.nut:1.0.0"` **to the top of your agent code**
 
+## Examples ##
+
+Full working examples with step-by-step instructions are provided in the [Examples](./Examples) directory.
+
 ## TreasureData Class Usage ##
 
 ### Constructor: TreasureData(*apiKey*) ###
@@ -86,10 +90,6 @@ This method enables (*value* is `true`) or disables (*value* is `false`) the lib
 #### Returns ####
 
 Nothing.
-
-## Examples ##
-
-Full working examples are provided in the [Examples](./Examples) directory.
 
 ## Testing ##
 
